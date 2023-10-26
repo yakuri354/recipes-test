@@ -22,6 +22,9 @@ struct MainView: View {
 
 @main
 struct recipesApp: App {
+    init() {
+        
+    }
     var body: some Scene {
         WindowGroup {
             MainView()

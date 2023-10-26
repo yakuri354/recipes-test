@@ -10,7 +10,7 @@ import SwiftUI
 struct NewRecipeView: View {
     @Binding var recipe: Recipe
     
-    @EnvironmentObject var recipes: RecipeStorage
+    @Environment var recipes: RecipeStorage
     @Binding var displaySheet: Bool
     @Binding var then: (Recipe, RecipeStorage) throws -> Void
     

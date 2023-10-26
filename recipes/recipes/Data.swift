@@ -20,20 +20,6 @@ struct Recipe: Identifiable {
     var content: String
 }
 
-protocol RecipeRepo: ObservableObject, Observable {
-    var recipes: [Recipe] { get }
-    
-    func fetch() throws
-    func insert(recipe: Recipe) throws
-}
-
-class FakeRecipes: RecipeRepo {
-    @Published private(set) var recipes: [Recipe] = []
-    
-    func fetch() {}
-    func insert(recipe: Recipe) {}
-}
-
 struct AssetImageProvider: ImageProvider {
     @Binding
     public var recipes: RecipeStorage
@@ -50,8 +36,53 @@ struct AssetImageProvider: ImageProvider {
     }
 }
 
-class RecipeStorage: RecipeRepo {
-    @Published private(set) var recipes: [Recipe] = []
+class RecipeRef: ObservableObject {
+    @Published private(set) var recipe: Recipe
+    
+    weak var storage: RecipeStorage?
+    
+    init(recipe: Recipe, storage: RecipeStorage?) {
+        self.recipe = recipe
+        self.storage = storage
+    }
+    
+    deinit {
+        if let s = storage {
+            s.unalloc(id: recipe.id)
+        }
+    }
+}
+
+class SearchViewRange: ObservableObject {
+    @Published private(set) var range: Range<Int>
+    @Binding var query: String
+    
+    private var storage: RecipeStorage
+    
+    init(storage: RecipeStorage, query: Binding<String>) {
+        self._query = query
+        self.storage = storage
+        range = 0..<0
+        update()
+    }
+    
+    func update() {
+        let cnt = (try? storage.db.scalar("select count(*) from recipes where name like %\(query)%") as? Int64) ?? 0
+        
+        range = 0..<Int(cnt)
+    }
+}
+
+class Weak<T: AnyObject> {
+    weak var v: T?
+    
+    init(v: T? = nil) {
+        self.v = v
+    }
+}
+
+class RecipeStorage {
+    private(set) var loadedRecipes: [Int64: Weak<RecipeRef>] = [:]
     var db: Connection
     
     init() throws {
@@ -60,8 +91,6 @@ class RecipeStorage: RecipeRepo {
         db = try Connection(path)
         
         try initDB()
-        
-        try fetch()
     }
     
     private func initDB() throws {
@@ -80,19 +109,44 @@ class RecipeStorage: RecipeRepo {
         """)
     }
     
+    public func get(pos: Int64) -> RecipeRef? {
+        guard let id = try? db.scalar("select id from recipes order by id limit 1") as? Int64 else {
+            return nil
+        }
+        return get(id: id)
+    }
+    
+    public func get(id: Int64) -> RecipeRef? {
+        if let cached = loadedRecipes[id] {
+            if let recipe = cached.v {
+                return recipe
+            } else {
+                loadedRecipes.removeValue(forKey: id)
+            }
+        }
+        
+        guard let row = try? db.prepare("select * from recipes where id = ?", [id]).next() else {
+            return nil
+        }
+        
+        let recipe = Recipe(id: row[0] as! Int64, name: row[1] as! String, content: row[2] as! String)
+        let ref = RecipeRef(recipe: recipe, storage: self)
+        
+        loadedRecipes[id] = Weak(v: ref)
+        
+        return ref
+    }
+    
     public func insert(recipe: Recipe) throws {
         try db.prepare("insert into recipes (name, content) values (cast(? as text), cast(? as text))", [recipe.name, recipe.content]).run()
-        try fetch()
     }
     
     public func update(recipe: Recipe) throws {
         try db.prepare("update recipes set name = cast(? as text), content = cast(? as text) where id = ?", [recipe.name, recipe.content, recipe.id]).run()
-        try fetch()
     }
     
     public func delete(recipe: Recipe) throws {
         try db.prepare("delete from recipes where id = ?", recipe.id).run()
-        try fetch()
     }
     
     public func getImage(name: String) throws -> NSImage? {
@@ -103,17 +157,14 @@ class RecipeStorage: RecipeRepo {
         }
     }
     
+    public func unalloc(id: Int64) {
+        loadedRecipes.removeValue(forKey: id)
+    }
+    
     public func putImage(name: String, image: NSImage) throws {
         // TODO
         // db.prepare("insert into images (name, data) values (cast(? as text), cast(? as blob))", [name, image.jpeg])
     }
-    
-    public func fetch() throws {
-        recipes = try db.prepare("select * from recipes").map { row in
-            Recipe(id: row[0] as! Int64, name: row[1] as! String, content: row[2] as! String)
-        }
-    }
-    
     
     private static func dbPath() throws -> String {
         let path = NSSearchPathForDirectoriesInDomains(

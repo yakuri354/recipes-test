@@ -17,7 +17,6 @@
 		AD4C31FE2ACE894800182873 /* recipesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4C31FD2ACE894800182873 /* recipesUITestsLaunchTests.swift */; };
 		AD4C320B2ACE926400182873 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4C320A2ACE926400182873 /* Data.swift */; };
 		AD4C320D2ACE99A800182873 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4C320C2ACE99A800182873 /* RecipeView.swift */; };
-		AD4C32102ACE9EBE00182873 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = AD4C320F2ACE9EBE00182873 /* SQLite */; };
 		AD4C32122ACEC6BF00182873 /* NewRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4C32112ACEC6BF00182873 /* NewRecipeView.swift */; };
 		ADDB91782AD73171002C5620 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = ADDB91772AD73171002C5620 /* MarkdownUI */; };
 /* End PBXBuildFile section */
@@ -62,7 +61,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD03E3D02AEA38B700032392 /* Fuse in Frameworks */,
-				AD4C32102ACE9EBE00182873 /* SQLite in Frameworks */,
 				ADDB91782AD73171002C5620 /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +82,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD03E3E62AEAE26400032392 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AD4C31D32ACE894700182873 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +96,7 @@
 				AD4C31F02ACE894800182873 /* recipesTests */,
 				AD4C31FA2ACE894800182873 /* recipesUITests */,
 				AD4C31DD2ACE894700182873 /* Products */,
+				AD03E3E62AEAE26400032392 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -161,7 +167,6 @@
 			);
 			name = recipes;
 			packageProductDependencies = (
-				AD4C320F2ACE9EBE00182873 /* SQLite */,
 				ADDB91772AD73171002C5620 /* MarkdownUI */,
 				AD03E3CF2AEA38B700032392 /* Fuse */,
 			);
@@ -217,13 +222,16 @@
 				TargetAttributes = {
 					AD4C31DB2ACE894700182873 = {
 						CreatedOnToolsVersion = 15.0;
+						LastSwiftMigration = 1500;
 					};
 					AD4C31EC2ACE894800182873 = {
 						CreatedOnToolsVersion = 15.0;
+						LastSwiftMigration = 1500;
 						TestTargetID = AD4C31DB2ACE894700182873;
 					};
 					AD4C31F62ACE894800182873 = {
 						CreatedOnToolsVersion = 15.0;
+						LastSwiftMigration = 1500;
 						TestTargetID = AD4C31DB2ACE894700182873;
 					};
 				};
@@ -448,6 +456,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = recipes/recipes.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -466,6 +475,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = yakuri354.recipes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -475,6 +485,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = recipes/recipes.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -502,6 +513,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 55KAQ4TTBM;
@@ -511,6 +523,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = yakuri354.recipesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/recipes.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/recipes";
 			};
@@ -521,6 +534,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 55KAQ4TTBM;
@@ -539,6 +553,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 55KAQ4TTBM;
@@ -547,6 +562,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = yakuri354.recipesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = recipes;
 			};
@@ -556,6 +572,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 55KAQ4TTBM;
@@ -642,11 +659,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AD03E3CE2AEA38B700032392 /* XCRemoteSwiftPackageReference "fuse-swift" */;
 			productName = Fuse;
-		};
-		AD4C320F2ACE9EBE00182873 /* SQLite */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AD4C320E2ACE9EBE00182873 /* XCRemoteSwiftPackageReference "SQLite" */;
-			productName = SQLite;
 		};
 		ADDB91772AD73171002C5620 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;

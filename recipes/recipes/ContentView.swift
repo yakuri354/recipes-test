@@ -9,7 +9,7 @@ import SwiftUI
 import Fuse
 
 struct ContentView: View {
-    @StateObject private var recipes: RecipeStorage
+    @State private var recipes: RecipeStorage
     
     @State private var sheetPresented: Bool = false
     @State var sheetAction: (Recipe, RecipeStorage) throws -> Void = {_, _ in }
@@ -20,7 +20,7 @@ struct ContentView: View {
     
     init() throws {
         let storage = try RecipeStorage()
-        _recipes = StateObject(wrappedValue: storage)
+        _recipes = State(initialValue: storage)
     }
     
     @State private var selectedRecipe: Int64?
