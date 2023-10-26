@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "A08C4717-C20D-41A8-8392-7D34869A17FA"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5FB96EC4-FC5A-4C5F-8399-FD9F6CF1F327"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "recipes/Data.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "init()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5FB96EC4-FC5A-4C5F-8399-FD9F6CF1F327 - 64a4f01bda0a393e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "recipes.RecipeStorage.init() throws -&gt; recipes.RecipeStorage"
+                  moduleName = "recipes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lain/Source/recipes/recipes/Data.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "888">
+               </Location>
+               <Location
+                  uuid = "5FB96EC4-FC5A-4C5F-8399-FD9F6CF1F327 - 64a4f01bda0a393e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "recipes.RecipeStorage.init() throws -&gt; recipes.RecipeStorage"
+                  moduleName = "recipes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lain/Source/recipes/recipes/Data.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "836">
+               </Location>
+               <Location
+                  uuid = "5FB96EC4-FC5A-4C5F-8399-FD9F6CF1F327 - 64a4f01bda0a393e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "recipes.RecipeStorage.init() throws -&gt; recipes.RecipeStorage"
+                  moduleName = "recipes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lain/Source/recipes/recipes/Data.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "752">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E62CC32C-5D8B-49FA-B3CC-8BB117C3DEE6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "recipes/Data.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "init()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "12DBEBD1-0E23-45CB-9F4D-2D513DF87BE2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "recipes/Data.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "insert(recipe:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "88373AB4-DD5E-4B61-8828-B67CC71BE7C5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "recipes/Data.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "delete(recipe:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "88373AB4-DD5E-4B61-8828-B67CC71BE7C5 - c594e8b333e8ef5e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "recipes.RecipeStorage.delete(recipe: recipes.Recipe) throws -&gt; ()"
+                  moduleName = "recipes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lain/Source/recipes/recipes/Data.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "88373AB4-DD5E-4B61-8828-B67CC71BE7C5 - c594e8b333e8ef5e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "recipes.RecipeStorage.delete(recipe: recipes.Recipe) throws -&gt; ()"
+                  moduleName = "recipes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lain/Source/recipes/recipes/Data.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "76">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
