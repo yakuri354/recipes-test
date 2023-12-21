@@ -8,12 +8,31 @@
 import SwiftUI
 import Fuse
 import SwiftData
+import SQLite
 
 struct ContentView: View {
-    @Query var cuisines: [Cuisine]
+    var db: Connection
+    @State var cuisines: [Cuisine]
+    @State var recipes: DbView<Recipe, SQLite.Table>
     @State var searchText: String = ""
     @State var selectedCuisine: Cuisine? = nil
-    @State var selectedRecipe: Recipe? = nil
+    @State var selectedRecipeN: Int? = nil
+    
+    private func searchQuery(s: String, cuisine: Int64) -> SQLite.Table {
+        return Recipe.table().filter(Expression<Int64>("cuisine_id") == cuisine).where(Expression<String>("name").like("%" + s + "%"))
+    }
+    
+    init() throws {
+        // let dbPath = Bundle.main.url(forResource: "db", withExtension: "sqlite")!.path()
+        let dbPath = FileManager.default.homeDirectoryForCurrentUser.path() + "/test.sqlite"
+        
+        debugPrint(dbPath)
+        
+        db = try Connection(dbPath)
+        cuisines = try! db.prepare(Cuisine.table()).map {r in try! r.decode()}
+        recipes = try DbView(db: db, query: Recipe.table())
+        recipes = try DbView(db: db, query: self.searchQuery(s: "", cuisine: 0))
+    }
     
 //    private func sort(s: String) -> [Recipe] {
 //        if searchText == "" {
@@ -32,10 +51,16 @@ struct ContentView: View {
                 Text(c.name)
             }
         } content: {
-            if let sel_c = selectedCuisine {
-                List(sel_c.recipes.filter({r in searchText == "" || r.name.localizedStandardContains(searchText)}), id: \.self, selection: $selectedRecipe) { r in
-                    Text(r.name)
-                        .font(.title3)
+            if selectedCuisine != nil {
+                List(0..<recipes.size, id: \.self, selection: $selectedRecipeN) { i in
+                    let _ = debugPrint("getting " + String(i) + " from " + String(selectedCuisine?.id ?? -1))
+                    if let r = try? recipes.getNth(n: i) {
+                        Text(r.name)
+                            .font(.title3)
+                    } else {
+                        Text("Recipe not found")
+                    }
+                    
                     // Text(r.desc)
                 }
             } else {
@@ -43,16 +68,29 @@ struct ContentView: View {
                     .padding()
             }
         } detail: {
-            if let sel_r = selectedRecipe {
-                Text(sel_r.name)
-                    .font(.largeTitle)
-                Text(sel_r.desc)
+            if let sel_r = selectedRecipeN {
+                var _ = debugPrint("updating recipe with cuisine " + String(self.selectedCuisine?.id ?? -1))
+                if let r = try! recipes.getNth(n: sel_r) {
+                    Text(r.name)
+                        .font(.largeTitle)
+                    Text(r.description)
+                } else {
+                    Text("Recipe not found")
+                }
             } else {
                 Text("Select a recipe")
                     .padding()
             }
         }
         .searchable(text: $searchText)
+        .onChange(of: searchText) { old, new in
+            debugPrint("update searchText " + new + " cuisine " + String(self.selectedCuisine?.id ?? -1))
+            try! recipes.search(q: self.searchQuery(s: new, cuisine: self.selectedCuisine?.id ?? 0))
+        }
+        .onChange(of: selectedCuisine) { old, new in
+            debugPrint("update selectedCuisine " + String(new?.id ?? -1))
+            try! recipes.search(q: self.searchQuery(s: self.searchText, cuisine: new?.id ?? 0))
+        }
         .onAppear {
             if cuisines.count > 0 { selectedCuisine = cuisines[0] }
         }

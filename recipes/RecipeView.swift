@@ -18,7 +18,7 @@ struct RecipeView: View {
                     .font(.system(size: 32))
                     .fontWeight(.heavy)
                     .padding(EdgeInsets(top: 0, leading: 0, bottom: 15, trailing: 0))
-                Markdown(recipe.desc)
+                Markdown(recipe.description)
                 Spacer()
             }
             .padding()
